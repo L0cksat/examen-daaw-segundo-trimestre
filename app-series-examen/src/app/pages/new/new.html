@@ -1,0 +1,41 @@
+<button><a routerLink="/home"> <-- Volver</a></button>
+<h2>CREAR UNA SERIE NUEVA</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+    <label for="title" name="title">Title:</label>
+    <input formControlName="title" type="text" placeholder="Introduce el título">
+    @if(form.get('title')?.invalid && form.get('title')?.touched){
+        <p style="color: red">El titulo es requerido</p>
+    }
+    @if(form.get('title')?.hasError('minlength') && form.get('title')?.touched){
+        <p style="color: red">El titulo debe tener minimo 3 caracteres</p>
+    }
+
+    <label for="channel" name="channel">Channel:</label>
+    <input formControlName="channel" type="text" placeholder="Introduce el canal">
+    @if(form.get('channel')?.invalid && form.get('channel')?.touched){
+        <p style="color: red">El canal es requerido</p>
+    }
+
+    <label for="rating" name="rating">Rating:</label>
+    <input formControlName="rating" type="number" placeholder="Introduce la puntuación" min="0" max="10">
+    @if(form.get('rating')?.invalid && form.get('rating')?.touched){
+        <div style="color: red">
+            @if(form.get('rating')?.hasError('required')){
+                <p>La puntuación es requerida</p>
+            }
+
+            @if(form.get('rating')?.hasError('min')){
+                <p>La puntuación mínima es 0</p>
+            }
+
+            @if(form.get('rating')?.hasError('max')){
+                <p>La puntación máxima es 10</p>
+            }
+        </div>
+        
+    }
+
+    <button type="submit" [disabled]="form.invalid">Guardar Serie</button>
+    
+</form>

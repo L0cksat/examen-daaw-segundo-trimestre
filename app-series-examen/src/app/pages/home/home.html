@@ -1,0 +1,11 @@
+<h2>LISTA SERIES</h2>
+
+<ul>
+    @for (serie of series; track serie.id) {
+        <li>
+            Title: <strong>{{ serie.title }}</strong> - Channel: <strong>{{ serie.channel }}</strong> - Rating: <strong>{{ serie.rating }}</strong>
+        </li>
+    }@empty {
+        <li>No hay series disponibles</li>
+    }
+</ul>
